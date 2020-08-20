@@ -9,11 +9,11 @@ namespace WebApiExample.Contracts
 {
     public interface IProductRepository
     {
-        Task<ActionResult<IEnumerable<Products>>> GetAll();
-        Task<Products> Add(Products products);
-        Task<Products> Find(int id);
-        Task<Products> Update(Products products);
-        Task<Products> Remove(int id);
+        Task<ActionResult<IEnumerable<Product>>> GetAll();
+        Task<Product> Add(Product products);
+        Task<Product> Find(int id);
+        Task<Product> Update(Product products);
+        Task<Product> Remove(int id);
         Task<bool> IsExists(int id);
     }
 }

@@ -8,11 +8,11 @@ namespace WebApiExample.Contracts
 {
     public interface ICustomerRepository
     {
-        IEnumerable<Customers> GetAll();
-        Task<Customers> Add(Customers customer);
-        Task<Customers> Find(int id);
-        Task<Customers> Update(Customers customer);
-        Task<Customers> Remove(int id);
+        IEnumerable<Customer> GetAll();
+        Task<Customer> Add(Customer customer);
+        Task<Customer> Find(int id);
+        Task<Customer> Update(Customer customer);
+        Task<Customer> Remove(int id);
         Task<bool> IsExists(int id);
         Task<int> CountCustomer();
     }

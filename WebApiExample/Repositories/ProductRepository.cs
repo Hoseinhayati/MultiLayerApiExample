@@ -17,19 +17,19 @@ namespace WebApiExample.Repositories
             _ctx = context;
         }
 
-        public async Task<Products> Add(Products product)
+        public async Task<Product> Add(Product product)
         {
             await _ctx.Products.AddAsync(product);
             await _ctx.SaveChangesAsync();
             return product;
         }
 
-        public async Task<Products> Find(int id)
+        public async Task<Product> Find(int id)
         {
             return await _ctx.Products.Include(c => c.OrderItems).SingleOrDefaultAsync(c => c.Id == id);
         }
 
-        public async Task<ActionResult<IEnumerable<Products>>> GetAll()
+        public async Task<ActionResult<IEnumerable<Product>>> GetAll()
         {
             return await _ctx.Products.ToListAsync();
         }
@@ -39,7 +39,7 @@ namespace WebApiExample.Repositories
             return await _ctx.Products.AnyAsync(c => c.Id == id);
         }
 
-        public async Task<Products> Remove(int id)
+        public async Task<Product> Remove(int id)
         {
             var product = await _ctx.Products.SingleAsync(c => c.Id == id);
             _ctx.Products.Remove(product);
@@ -47,7 +47,7 @@ namespace WebApiExample.Repositories
             return product;
         }
 
-        public async Task<Products> Update(Products product)
+        public async Task<Product> Update(Product product)
         {
             _ctx.Update(product);
             await _ctx.SaveChangesAsync();

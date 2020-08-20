@@ -4,18 +4,11 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
-using WebApiExample.Contracts;
-using WebApiExample.Models;
-using WebApiExample.Repositories;
 
-namespace WebApiExample
+namespace WebApiExample.Web
 {
     public class Startup
     {
@@ -29,13 +22,7 @@ namespace WebApiExample
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllers();
-            services.AddDbContext<ApiExampleContext>(options => options.UseSqlServer("Data Source=.;Initial Catalog=ApiExample;Integrated Security=True;"));
-            services.AddTransient<ICustomerRepository,CustomerRepository>();
-            services.AddTransient<IProductRepository, ProductRepository>();
-            services.AddTransient<ISalesPersonRepository, SalesPersonRepository>();
-            services.AddResponseCaching();
-            services.AddMemoryCache();
+            services.AddControllersWithViews();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -45,14 +32,21 @@ namespace WebApiExample
             {
                 app.UseDeveloperExceptionPage();
             }
+            else
+            {
+                app.UseExceptionHandler("/Home/Error");
+            }
+            app.UseStaticFiles();
 
             app.UseRouting();
 
             app.UseAuthorization();
-            app.UseResponseCaching();
+
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapControllers();
+                endpoints.MapControllerRoute(
+                    name: "default",
+                    pattern: "{controller=Home}/{action=Index}/{id?}");
             });
         }
     }

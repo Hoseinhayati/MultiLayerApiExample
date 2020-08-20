@@ -5,13 +5,13 @@ using System.ComponentModel.DataAnnotations;
 
 namespace WebApiExample.Models
 {
-    public partial class Customers
+    public partial class Customer
     {
-        public Customers()
+        public Customer()
         {
-            Orders = new HashSet<Orders>();
+            Orders = new HashSet<Order>();
         }
-
+        [Key]
         public int Id { get; set; }
         [MaxLength(120, ErrorMessage = "the length of {0} is to much")]
         [StringLength(120, MinimumLength = 4, ErrorMessage = "The {0} Its big")]
@@ -30,6 +30,6 @@ namespace WebApiExample.Models
         public string State { get; set; }
         public string ZipCode { get; set; }
 
-        public virtual ICollection<Orders> Orders { get; set; }
+        public virtual ICollection<Order> Orders { get; set; }
     }
 }

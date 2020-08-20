@@ -1,15 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace WebApiExample.Models
 {
-    public partial class Orders
+    public partial class Order
     {
-        public Orders()
+        public Order()
         {
-            OrderItems = new HashSet<OrderItems>();
+            OrderItems = new HashSet<OrderItem>();
         }
-
+        [Key]
         public int Id { get; set; }
         public DateTime? Date { get; set; }
         public double? Total { get; set; }
@@ -17,8 +18,8 @@ namespace WebApiExample.Models
         public int CustomerId { get; set; }
         public int SalesPersonId { get; set; }
 
-        public virtual Customers Customer { get; set; }
+        public virtual Customer Customer { get; set; }
         public virtual SalesPerson SalesPerson { get; set; }
-        public virtual ICollection<OrderItems> OrderItems { get; set; }
+        public virtual ICollection<OrderItem> OrderItems { get; set; }
     }
 }

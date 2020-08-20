@@ -15,15 +15,15 @@ namespace WebApiExample.Models
         {
         }
 
-        public virtual DbSet<Customers> Customers { get; set; }
-        public virtual DbSet<OrderItems> OrderItems { get; set; }
-        public virtual DbSet<Orders> Orders { get; set; }
-        public virtual DbSet<Products> Products { get; set; }
+        public virtual DbSet<Customer> Customers { get; set; }
+        public virtual DbSet<OrderItem> OrderItems { get; set; }
+        public virtual DbSet<Order> Orders { get; set; }
+        public virtual DbSet<Product> Products { get; set; }
         public virtual DbSet<SalesPerson> SalesPerson { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Customers>(entity =>
+            modelBuilder.Entity<Customer>(entity =>
             {
                 entity.Property(e => e.Adress).HasMaxLength(50);
 
@@ -42,7 +42,7 @@ namespace WebApiExample.Models
                 entity.Property(e => e.ZipCode).HasMaxLength(150);
             });
 
-            modelBuilder.Entity<OrderItems>(entity =>
+            modelBuilder.Entity<OrderItem>(entity =>
             {
                 entity.HasOne(d => d.Order)
                     .WithMany(p => p.OrderItems)
@@ -57,7 +57,7 @@ namespace WebApiExample.Models
                     .HasConstraintName("FK_OrderItems_Products1");
             });
 
-            modelBuilder.Entity<Orders>(entity =>
+            modelBuilder.Entity<Order>(entity =>
             {
                 entity.Property(e => e.Date).HasColumnType("datetime");
 
@@ -76,7 +76,7 @@ namespace WebApiExample.Models
                     .HasConstraintName("FK_Orders_SalesPerson1");
             });
 
-            modelBuilder.Entity<Products>(entity =>
+            modelBuilder.Entity<Product>(entity =>
             {
                 entity.Property(e => e.Name).HasMaxLength(150);
 

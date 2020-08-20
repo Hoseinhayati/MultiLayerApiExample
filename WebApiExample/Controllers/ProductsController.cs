@@ -23,14 +23,14 @@ namespace WebApiExample.Controllers
 
         // GET: api/Products
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Products>>> GetProducts()
+        public async Task<ActionResult<IEnumerable<Product>>> GetProducts()
         {
             return await _productRepository.GetAll();
         }
 
         // GET: api/Products/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Products>> GetProducts(int id)
+        public async Task<ActionResult<Product>> GetProducts(int id)
         {
             var products = await _productRepository.Find(id);
 
@@ -44,7 +44,7 @@ namespace WebApiExample.Controllers
 
         // PUT: api/Products/5
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutProducts(int id, Products products)
+        public async Task<IActionResult> PutProducts(int id, Product products)
         {
             if (id != products.Id)
             {
@@ -74,7 +74,7 @@ namespace WebApiExample.Controllers
 
         // POST: api/Products
         [HttpPost]
-        public async Task<ActionResult<Products>> PostProducts(Products products)
+        public async Task<ActionResult<Product>> PostProducts(Product products)
         {
             if (!ModelState.IsValid)
             {
@@ -88,7 +88,7 @@ namespace WebApiExample.Controllers
 
         // DELETE: api/Products/5
         [HttpDelete("{id}")]
-        public async Task<ActionResult<Products>> DeleteProducts(int id)
+        public async Task<ActionResult<Product>> DeleteProducts(int id)
         {
             if (!ModelState.IsValid)
             {

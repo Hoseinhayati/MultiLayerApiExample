@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Caching.Memory;
 using WebApiExample.Contracts;
 using WebApiExample.Models;
 using WebApiExample.Repositories;
@@ -22,6 +23,7 @@ namespace WebApiExample.Controllers
         //    _ctx = context;
         //}
         private readonly ICustomerRepository _customerRepository;
+
         public CustomersController(ICustomerRepository customerRepository)
         {
             _customerRepository = customerRepository;
@@ -29,7 +31,7 @@ namespace WebApiExample.Controllers
 
 
         [HttpGet]
-        [ResponseCache(Duration = 60)]
+        //[ResponseCache(Duration = 60)]
         public IActionResult GetCostumer()
         {
             var result = new ObjectResult(_customerRepository.GetAll())
@@ -58,7 +60,7 @@ namespace WebApiExample.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> PostCustomer([FromBody] Customers customer)
+        public async Task<IActionResult> PostCustomer([FromBody] Customer customer)
         {
             if (!ModelState.IsValid)
             {
@@ -70,7 +72,7 @@ namespace WebApiExample.Controllers
         }
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutCustomer([FromRoute] int id, [FromBody] Customers customers)
+        public async Task<IActionResult> PutCustomer([FromRoute] int id, [FromBody] Customer customers)
         {
             await _customerRepository.Update(customers);
             return Ok(customers);
