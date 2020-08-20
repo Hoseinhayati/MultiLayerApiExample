@@ -24,5 +24,17 @@ namespace WebApiExample.Web.Controllers
         {
             return View(_customer.GetAllCustomer());
         }
+
+        public IActionResult Create()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult Create(Customer customer)
+        {
+            _customer.AddCustomer(customer);
+            return RedirectToAction("Index");
+        }
     }
 }

@@ -14,7 +14,7 @@ namespace WebApiExample.Models
         [Key]
         public int Id { get; set; }
         [MaxLength(120, ErrorMessage = "the length of {0} is to much")]
-        [StringLength(120, MinimumLength = 4, ErrorMessage = "The {0} Its big")]
+        [StringLength(120, MinimumLength = 4, ErrorMessage = "The {0} Its small")]
         [DisplayName("FName")]
         [Required(ErrorMessage = "Please Enter {0}")]
         public string FirstName { get; set; }
