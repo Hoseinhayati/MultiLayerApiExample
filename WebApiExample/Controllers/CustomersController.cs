@@ -17,11 +17,6 @@ namespace WebApiExample.Controllers
     [ApiController]
     public class CustomersController : ControllerBase
     {
-        //private ApiExampleContext _ctx;
-        //public CustomersController(ApiExampleContext context)
-        //{
-        //    _ctx = context;
-        //}
         private readonly ICustomerRepository _customerRepository;
 
         public CustomersController(ICustomerRepository customerRepository)
@@ -42,7 +37,6 @@ namespace WebApiExample.Controllers
             Request.HttpContext.Response.Headers.Add("X-Name", "Hossein Hayati");
 
             return result;
-            //return new ObjectResult(_ctx.Customers);
         }
 
         [HttpGet("{id}")]
