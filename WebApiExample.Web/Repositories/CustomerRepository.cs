@@ -41,7 +41,7 @@ namespace WebApiExample.Web.Repositories
         {
             string jsonCustomer = JsonConvert.SerializeObject(customer);
             StringContent content = new StringContent(jsonCustomer, Encoding.UTF8, "application/json");
-            var result = _client.PutAsync(apiUrl, content).Result;
+            var result = _client.PutAsync(apiUrl + "/" + customer.Id, content).Result;
         }
 
         public void DeleteCustomer(int id)

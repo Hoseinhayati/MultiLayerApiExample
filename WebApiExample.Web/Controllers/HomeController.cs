@@ -36,5 +36,24 @@ namespace WebApiExample.Web.Controllers
             _customer.AddCustomer(customer);
             return RedirectToAction("Index");
         }
+
+        public IActionResult Edit(int id)
+        {
+            var user = _customer.GetCustomerById(id);
+            return View(user);
+        }
+
+        [HttpPost]
+        public IActionResult Edit(Customer customer)
+        {
+            _customer.UpdateCustomer(customer);
+            return RedirectToAction("Index");
+        }
+
+        public IActionResult Delete(int id)
+        {
+            _customer.DeleteCustomer(id);
+            return RedirectToAction("Index");
+        }
     }
 }
