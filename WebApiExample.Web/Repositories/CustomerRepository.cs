@@ -1,6 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Text;
+using Microsoft.AspNetCore.Http;
 using Newtonsoft.Json;
 using WebApiExample.Web.Models;
 
@@ -13,11 +15,12 @@ namespace WebApiExample.Web.Repositories
 
         public CustomerRepository()
         {
-            _client=new HttpClient();
+            _client = new HttpClient();
         }
 
-        public List<Customer> GetAllCustomer()
+        public List<Customer> GetAllCustomer(string token)
         {
+            _client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
             var result = _client.GetStringAsync(apiUrl).Result;
             List<Customer> list = JsonConvert.DeserializeObject<List<Customer>>(result);
             return list;
@@ -33,7 +36,7 @@ namespace WebApiExample.Web.Repositories
         public void AddCustomer(Customer customer)
         {
             string jsonCustomer = JsonConvert.SerializeObject(customer);
-            StringContent content=new StringContent(jsonCustomer,Encoding.UTF8,"application/json");
+            StringContent content = new StringContent(jsonCustomer, Encoding.UTF8, "application/json");
             var result = _client.PostAsync(apiUrl, content).Result;
         }
 
@@ -46,9 +49,9 @@ namespace WebApiExample.Web.Repositories
 
         public void DeleteCustomer(int id)
         {
-           var result=  _client.DeleteAsync(apiUrl + "/" + id).Result;
+            var result = _client.DeleteAsync(apiUrl + "/" + id).Result;
         }
     }
 
-  
+
 }

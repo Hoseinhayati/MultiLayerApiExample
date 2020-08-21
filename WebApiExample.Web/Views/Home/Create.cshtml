@@ -1,4 +1,4 @@
-﻿@model WebApiExample.Web.Models.Customer
+﻿@model WebApiExample.Web.ViewModels.CustomerViewModel
 
 @{
     ViewData["Title"] = "View";
@@ -46,11 +46,6 @@
                 <label asp-for="State" class="control-label"></label>
                 <input asp-for="State" class="form-control" />
                 <span asp-validation-for="State" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="ZipCode" class="control-label"></label>
-                <input asp-for="ZipCode" class="form-control" />
-                <span asp-validation-for="ZipCode" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />

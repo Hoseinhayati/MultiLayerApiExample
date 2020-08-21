@@ -90,9 +90,9 @@ namespace WebApiExample.Controllers
             return products;
         }
 
-        private async Task<bool> ProductsExists(int id)
-        {
-            return await _productRepository.IsExists(id);
-        }
+        //private async Task<bool> ProductsExists(int id)
+        //{
+        //    return await _productRepository.IsExists(id);
+        //}
     }
 }
