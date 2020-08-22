@@ -28,6 +28,7 @@ namespace WebApiExample.Controllers
             _customerRepository = customerRepository;
         }
 
+        
         [HttpGet]
         //[ResponseCache(Duration = 60)]
         public IActionResult GetCostumer()
@@ -42,6 +43,11 @@ namespace WebApiExample.Controllers
             return result;
         }
 
+        /// <summary>
+        /// This Method Get All Customer
+        /// </summary>
+        /// <param name="id">This int get customer id</param>
+        /// <returns></returns>
         [HttpGet("{id}")]
         public async Task<IActionResult> GetCostumer([FromRoute] int id)
         {

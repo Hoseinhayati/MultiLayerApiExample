@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>WebApiExample</name>
+    </assembly>
+    <members>
+        <member name="M:WebApiExample.Controllers.CustomersController.GetCostumer(System.Int32)">
+            <summary>
+            This Method Get All Customer
+            </summary>
+            <param name="id">This int get customer id</param>
+            <returns></returns>
+        </member>
+    </members>
+</doc>

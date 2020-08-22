@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -35,11 +36,10 @@ namespace WebApiExample
         {
             services.AddSwaggerGen(swagger =>
             {
-                swagger.SwaggerDoc("V1", new OpenApiInfo
-                {
-                    Title = "Example Swagger"
-                });
+                swagger.SwaggerDoc("v1", new OpenApiInfo { Title = "My API" });
+                swagger.IncludeXmlComments(Path.Combine(Directory.GetCurrentDirectory(), @"\Examples\WebApiExample\WebApiExample", "WebApiExample.xml"));
             });
+            services.AddSwaggerGenNewtonsoftSupport();
             services.AddControllers();
             services.AddDbContext<ApiExampleContext>(options => options.UseSqlServer("Data Source=.;Initial Catalog=ApiExample;Integrated Security=True;"));
             services.AddTransient<ICustomerRepository, CustomerRepository>();
@@ -93,9 +93,7 @@ namespace WebApiExample
             app.UseSwagger();
             app.UseSwaggerUI(c =>
             {
-                // For Debug in Kestrel
-                c.SwaggerEndpoint("/swagger/v1/swagger.json", "Web API V1");
-                //c.SwaggerEndpoint("/webapi/swagger/v1/swagger.json", "Web API V1");
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API");
             });
             app.UseEndpoints(endpoints =>
             {
